@@ -1,12 +1,15 @@
-const AWS = require("aws-sdk");
+import * as dotenv from "dotenv";
+import * as AWS from "aws-sdk";
+
+// Load environment variables from .env file
+dotenv.config();
 
 export const sns = new AWS.SNS({
-  region: "eu-central-1",
+  region: process.env.AWS_REGION, // Use the region from .env
   credentials: {
-    accessKeyId: "AKIAYBBEQYVYRYR36E7Z",
-    secretAccessKey: "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",
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID || "", // Use the access key from .env
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || "", // Use the secret key from .env
   },
-  // Replace with your region
 });
-export const SNS_TOPIC_ARN =
-  "arn:aws:sns:eu-central-1:551979894129:TextractNotifications";
+
+export const SNS_TOPIC_ARN = process.env.SNS_TOPIC_ARN || ""; // Use the SNS Topic ARN from .env

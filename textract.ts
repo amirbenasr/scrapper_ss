@@ -1,5 +1,7 @@
 import { AwsCredentialIdentity, Credentials } from "@aws-sdk/types";
+import * as dotenv from "dotenv";
 
+dotenv.config();
 const {
   TextractClient,
   DetectDocumentTextCommand,
@@ -7,10 +9,10 @@ const {
 
 // Create a Textract client with explicit credentials
 const client = new TextractClient({
-  region: "eu-central-1",
+  region: process.env.AWS_REGION,
   credentials: {
-    accessKeyId: "AKIAYBBEQYVYRYR36E7Z",
-    secretAccessKey: "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",
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID || "",
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || "",
   } as AwsCredentialIdentity,
 });
 
