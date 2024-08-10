@@ -35,7 +35,8 @@ const images_main_div = '::-p-xpath(//*[@id="captcha-main-div"]/div/div[2])';
   // Launch the browser
   // const browser = await puppeteer.launch({ headless: false });
   const browser = await puppeteer.launch({
-    headless: true,
+    headless: false,
+    args: ["--proxy-server=196.235.168.8:808"],
   });
   const page = await browser.newPage();
 

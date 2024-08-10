@@ -13,3 +13,19 @@ export const sns = new AWS.SNS({
 });
 
 export const SNS_TOPIC_ARN = process.env.SNS_TOPIC_ARN || ""; // Use the SNS Topic ARN from .env
+
+const sendNotification = async (message: string) => {
+  const params = {
+    Message: message,
+    TopicArn: SNS_TOPIC_ARN,
+  };
+
+  try {
+    await sns.publish(params).promise();
+    console.log("Notification sent successfully.");
+  } catch (error) {
+    console.error("Failed to send notification:", error);
+  }
+};
+
+sendNotification("hello world");

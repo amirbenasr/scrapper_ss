@@ -80,7 +80,7 @@ var images_main_div = '::-p-xpath(//*[@id="captcha-main-div"]/div/div[2])';
     return __generator(this, function (_d) {
         switch (_d.label) {
             case 0: return [4 /*yield*/, puppeteer_1.default.launch({
-                    headless: true,
+                    headless: false,
                 })];
             case 1:
                 browser = _d.sent();

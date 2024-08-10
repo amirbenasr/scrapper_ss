@@ -37,13 +37,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.analyzeBase64Image = analyzeBase64Image;
+var dotenv = require("dotenv");
+dotenv.config();
 var _a = require("@aws-sdk/client-textract"), TextractClient = _a.TextractClient, DetectDocumentTextCommand = _a.DetectDocumentTextCommand;
 // Create a Textract client with explicit credentials
 var client = new TextractClient({
-    region: "eu-central-1",
+    region: process.env.AWS_REGION,
     credentials: {
-        accessKeyId: "AKIAYBBEQYVYRYR36E7Z",
-        secretAccessKey: "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",
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID || "",
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || "",
     },
 });
 // Function to analyze base64-encoded image
