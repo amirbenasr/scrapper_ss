@@ -75,7 +75,7 @@ var frame_selector = "iframe.k-content-frame";
 var code_main_div = '::-p-xpath(//*[@id="captcha-main-div"]/div/div[1])';
 var images_main_div = '::-p-xpath(//*[@id="captcha-main-div"]/div/div[2])';
 (function () { return __awaiter(void 0, void 0, void 0, function () {
-    var browser, page, emailInputs, selectedEmail, _i, emailInputs_1, email, style, displayPropertyofDiv, displayValue, passwordInputs, selectedPassword, _a, passwordInputs_1, password, style, displayPropertyofDiv, displayValue, captchaBtnId, buttonVerify, captchaSolved, submitBtn, buttonVerified, submitBtn2;
+    var browser, page, emailInputs, selectedEmail, _i, emailInputs_1, email, style, displayPropertyofDiv, displayValue, passwordInputs, selectedPassword, _a, passwordInputs_1, password, style, displayPropertyofDiv, displayValue, captchaBtnId, buttonVerify, captchaSolved, submitBtn, submitBtn2;
     var _b, _c;
     return __generator(this, function (_d) {
         switch (_d.label) {
@@ -88,7 +88,7 @@ var images_main_div = '::-p-xpath(//*[@id="captcha-main-div"]/div/div[2])';
             case 2:
                 page = _d.sent();
                 // Navigate to the desired URL
-                return [4 /*yield*/, page.goto(WEBSITE, { waitUntil: "domcontentloaded", timeout: 60000 })];
+                return [4 /*yield*/, page.goto(WEBSITE, { waitUntil: "domcontentloaded", timeout: 120000 })];
             case 3:
                 // Navigate to the desired URL
                 _d.sent();
@@ -195,87 +195,81 @@ var images_main_div = '::-p-xpath(//*[@id="captcha-main-div"]/div/div[2])';
                 captchaSolved = false;
                 _d.label = 23;
             case 23:
-                if (!!captchaSolved) return [3 /*break*/, 25];
+                if (!!captchaSolved) return [3 /*break*/, 27];
                 return [4 /*yield*/, solveCaptchaWithRetry(page)];
             case 24:
                 captchaSolved = _d.sent();
-                if (!captchaSolved) {
-                    console.error("Captcha solving failed. Retrying...");
-                }
-                return [3 /*break*/, 23];
-            case 25: 
+                if (!!captchaSolved) return [3 /*break*/, 26];
+                return [4 /*yield*/, solveCaptchaWithRetry(page)];
+            case 25:
+                captchaSolved = _d.sent();
+                _d.label = 26;
+            case 26: return [3 /*break*/, 23];
+            case 27: 
             // // await solvaCaptcha(frame);
             // console.log("after solving captcha, we need to type into inputs");
             // Ensure focus on email field before typing
             return [4 /*yield*/, (0, promises_1.setTimeout)(3000)];
-            case 26:
+            case 28:
                 // // await solvaCaptcha(frame);
                 // console.log("after solving captcha, we need to type into inputs");
                 // Ensure focus on email field before typing
                 _d.sent();
                 return [4 /*yield*/, (selectedEmail === null || selectedEmail === void 0 ? void 0 : selectedEmail.type("tunis.mirof@gmail.com", { delay: 150 }))];
-            case 27:
+            case 29:
                 _d.sent();
                 console.log("finished writing email");
                 return [4 /*yield*/, (0, promises_1.setTimeout)(3000)];
-            case 28:
+            case 30:
                 _d.sent();
                 // // Ensure focus on password field before typing
                 return [4 /*yield*/, (selectedPassword === null || selectedPassword === void 0 ? void 0 : selectedPassword.type("Azerty123456-*", { delay: 200 }))];
-            case 29:
+            case 31:
                 // // Ensure focus on password field before typing
                 _d.sent();
                 console.log("finished writing password");
                 return [4 /*yield*/, (0, promises_1.setTimeout)(3000)];
-            case 30:
-                _d.sent();
-                return [4 /*yield*/, page.$(submitLoginId)];
-            case 31:
-                submitBtn = _d.sent();
-                return [4 /*yield*/, (submitBtn === null || submitBtn === void 0 ? void 0 : submitBtn.click())];
             case 32:
                 _d.sent();
-                return [4 /*yield*/, (0, promises_1.setTimeout)(10000)];
+                return [4 /*yield*/, page.$(submitLoginId)];
             case 33:
+                submitBtn = _d.sent();
+                return [4 /*yield*/, (submitBtn === null || submitBtn === void 0 ? void 0 : submitBtn.click())];
+            case 34:
+                _d.sent();
+                return [4 /*yield*/, (0, promises_1.setTimeout)(10000)];
+            case 35:
                 _d.sent();
                 // Send SNS notification
                 return [4 /*yield*/, sendNotification("Login successful! : STEP 1")];
-            case 34:
+            case 36:
                 // Send SNS notification
                 _d.sent();
                 return [4 /*yield*/, page.goto("https://tunisia.blsspainglobal.com/Global/blsappointment/manageappointment", { waitUntil: "domcontentloaded", timeout: 6000 })];
-            case 35:
+            case 37:
                 _d.sent();
                 return [4 /*yield*/, (0, promises_1.setTimeout)(5000)];
-            case 36:
+            case 38:
                 _d.sent();
                 return [4 /*yield*/, page.evaluate(function () {
                         window.VerifyCaptcha();
                     })];
-            case 37:
-                _d.sent();
-                return [4 /*yield*/, solveCaptchaWithRetry(page)];
-            case 38:
-                _d.sent();
-                return [4 /*yield*/, (0, promises_1.setTimeout)(15000)];
             case 39:
                 _d.sent();
-                return [4 /*yield*/, page.$(captchaBtnId)];
+                return [4 /*yield*/, solveCaptchaWithRetry(page)];
             case 40:
-                buttonVerified = _d.sent();
-                if (!buttonVerified) return [3 /*break*/, 42];
-                return [4 /*yield*/, page.evaluate(function (button) { return button.click(); }, buttonVerified)];
+                _d.sent();
+                return [4 /*yield*/, (0, promises_1.setTimeout)(15000)];
             case 41:
                 _d.sent();
-                _d.label = 42;
-            case 42: return [4 /*yield*/, page.$(submitLoginId)];
-            case 43:
+                return [4 /*yield*/, page.$(submitLoginId)];
+            case 42:
                 submitBtn2 = _d.sent();
                 return [4 /*yield*/, (submitBtn2 === null || submitBtn2 === void 0 ? void 0 : submitBtn2.click())];
-            case 44:
+            case 43:
                 _d.sent();
                 return [4 /*yield*/, sendNotification("Login successful! : STEP 2")];
-            case 45:
+            case 44:
                 _d.sent();
                 return [2 /*return*/];
         }

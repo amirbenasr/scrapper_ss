@@ -36,12 +36,11 @@ const images_main_div = '::-p-xpath(//*[@id="captcha-main-div"]/div/div[2])';
   // const browser = await puppeteer.launch({ headless: false });
   const browser = await puppeteer.launch({
     headless: false,
-    args: ["--proxy-server=196.235.168.8:808"],
   });
   const page = await browser.newPage();
 
   // Navigate to the desired URL
-  await page.goto(WEBSITE, { waitUntil: "domcontentloaded", timeout: 60000 });
+  await page.goto(WEBSITE, { waitUntil: "domcontentloaded", timeout: 120000 });
   console.log("page loaded");
   // Set up dialog event listener
   page.on("dialog", async (dialog: any) => {
@@ -104,7 +103,7 @@ const images_main_div = '::-p-xpath(//*[@id="captcha-main-div"]/div/div[2])';
   while (!captchaSolved) {
     captchaSolved = await solveCaptchaWithRetry(page);
     if (!captchaSolved) {
-      console.error("Captcha solving failed. Retrying...");
+      captchaSolved = await solveCaptchaWithRetry(page);
     }
   }
   // // await solvaCaptcha(frame);
@@ -138,16 +137,12 @@ const images_main_div = '::-p-xpath(//*[@id="captcha-main-div"]/div/div[2])';
   });
   await solveCaptchaWithRetry(page);
   await setTimeout(15000);
-  const buttonVerified = await page.$(captchaBtnId);
-  if (buttonVerified) {
-    await page.evaluate(
-      (button) => (button as HTMLElement).click(),
-      buttonVerified
-    );
-  }
+
   const submitBtn2 = await page.$(submitLoginId);
   await submitBtn2?.click();
   await sendNotification("Login successful! : STEP 2");
+
+  //fill forms
 })();
 
 async function solvaCaptcha(frame: any | undefined): Promise<boolean> {
